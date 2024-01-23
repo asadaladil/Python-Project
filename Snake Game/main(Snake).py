@@ -35,12 +35,14 @@ while on:
         time.sleep(T)
     
     #detect collision with wall
-    if snake.head.xcor()>280 or snake.head.ycor()>260:
+    if snake.head.xcor()>290 or snake.head.ycor()>260:
         on=False 
         score.over()
+            
     elif snake.head.xcor()<=-300 or snake.head.ycor()<=-300:
         on=False 
         score.over()
+        x=score.get_score()
     
     #detect collision with tail
     for seg in snake.segment:
@@ -49,5 +51,11 @@ while on:
         elif snake.head.distance(seg)<10:
             on=False 
             score.over()
+        
 
 screen.exitonclick()
+if on:
+    x=score.get_score()
+    with open("High_Score.txt",mode="w") as file:
+        file.write(str(x))
+    file.close()
